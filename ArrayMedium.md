@@ -9,7 +9,7 @@ Note: You may not slant the container and n is at least 2.
 
 ### solution 1:
 
-'''C
+··· C
 class Solution {
 public:
     int maxArea(vector<int>& height) 
@@ -36,7 +36,7 @@ public:
         return water;
     }
 };
-'''
+···
 
 
 ## 15. 3Sum(不太看得懂答案)
