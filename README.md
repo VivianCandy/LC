@@ -1,4 +1,4 @@
-[What is LaTeX?](#what-is-latex)
+
 [26. Remove Duplicates from Sorted Array](#26-Remove-Duplicates-from-Sorted-Array)
 [solution 1]
 # 1.Array(easy)
