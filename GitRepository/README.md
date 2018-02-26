@@ -1,8 +1,8 @@
 [What is LaTeX?](#what-is-latex)
 [26. Remove Duplicates from Sorted Array](#26-Remove-Duplicates-from-Sorted-Array)
 [solution 1]
-#1.Array(easy)
-##1. Two Sum
+# 1.Array(easy)
+## 1. Two Sum
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 Example:
@@ -11,7 +11,7 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 
-###solution 1.
+### solution 1.
 
 class Solution {
 public:
@@ -35,7 +35,7 @@ public:
         }
     }
 };
-###soluton 2.
+### soluton 2.
  class Solution {
 public:
 vector<int> twoSum(vector<int>& nums, int target) {
@@ -53,7 +53,7 @@ vector<int> twoSum(vector<int>& nums, int target) {
 };
 
 
-##26. Remove Duplicates from Sorted Array
+## 26. Remove Duplicates from Sorted Array
 Given a sorted array, remove the duplicates in-place such that each element appear only once and return the new length.
 
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
@@ -64,7 +64,8 @@ Given nums = [1,1,2],
 
 Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
 It doesn't matter what you leave beyond the new length.
-solution 1:
+
+### solution 1:
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) 
@@ -87,7 +88,7 @@ public:
     }
 };
 
-solution 2:
+### solution 2:
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) 
@@ -110,7 +111,7 @@ public:
     }
 };
 
-27. Remove Element
+## 27. Remove Element
 Given an array and a value, remove all instances of that value in-place and return the new length.
 
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
@@ -122,7 +123,7 @@ Example:
 Given nums = [3,2,2,3], val = 3,
 
 Your function should return length = 2, with the first two elements of nums being 2.
-solution 1:
+### solution 1:
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) 
@@ -138,7 +139,7 @@ public:
         return count;
     }
 };
-solution 2:
+### solution 2:
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) 
@@ -159,7 +160,7 @@ public:
         return sz;
     }
 };
-35. Search Insert Position
+## 35. Search Insert Position
 Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 
 You may assume no duplicates in the array.
@@ -177,7 +178,7 @@ Example 3:
 Input: [1,3,5,6], 7
 Output: 4
 
-solution 1:
+### solution 1:
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) 
@@ -197,7 +198,7 @@ public:
     }
 };
 
-solution 2:
+### solution 2:
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target)
@@ -215,7 +216,7 @@ public:
     }
 
 };
-53. Maximum Subarray
+## 53. Maximum Subarray
 Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
 
 For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
@@ -226,7 +227,7 @@ click to show more practice.
 More practice:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 
-solution 1：（不能处理大量数据，bad）
+### solution 1：（不能处理大量数据，bad）
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) 
@@ -259,7 +260,7 @@ public:
     }
 };
 
-solution 2:
+### solution 2:
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) 
@@ -276,7 +277,7 @@ public:
         return max;
     }
 };
-solution 3: best
+### solution 3: best
 #include<math>
 class Solution {
 public:
@@ -297,12 +298,12 @@ public:
 };
 
 
-69.plus one
+## 69.plus one
 把给定的一个数加一，其中数的储存形式是[]
 例如：
 [1,9]+1=[2,0]
 [9,9]+1=[1,0,0]
-solution 1:
+### solution 1:
 class Solution 
 {
 public:
@@ -328,14 +329,16 @@ public:
 };
 
 
-88.  Merge Sorted Array
+## 88.  Merge Sorted Array
+
 Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
 
 Note:
 You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2. The number of elements initialized in nums1 and nums2 are m and n respectively.
 融合两个排序好的数组到第一个数组去，将1的前m个和2的前n个合并到1里排序。假设第一个size大于等于m+n
 
-solution 1：
+### solution 1：
+
 class Solution {
 public:
     vector<int> merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
@@ -373,7 +376,8 @@ public:
     }
 };
 
-solution 2：
+### solution 2：
+
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
@@ -382,7 +386,9 @@ public:
             nums1[ n + m - 1] =( m == 0 || nums2[n - 1] > nums1[m - 1]) ?nums2[--n] : nums1[--m];
     }
 };
-solution 3：（python）
+
+### solution 3：（python）
+
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
         nums1[:] = nums1[:m] + nums2[:n]
@@ -391,7 +397,8 @@ class Solution(object):
 
 
 
-118. Pascal's Triangle
+## 118. Pascal's Triangle
+
 Given numRows, generate the first numRows of Pascal's triangle.
 
 For example, given numRows = 5,
@@ -405,7 +412,7 @@ Return
  [1,4,6,4,1]
 ]
 
-solution 1： focus on the usage of vector<vector<int>> size
+### solution 1： focus on the usage of vector<vector<int>> size
 class Solution {
 public:
     vector<vector<int> > generate(int numRows) 
@@ -430,7 +437,8 @@ public:
     }
 };
 
-solution 2：
+### solution 2：
+
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) 
@@ -445,7 +453,7 @@ public:
     }
 };
 
-119. Pascal's Triangle II
+### 119. Pascal's Triangle II
 Given an index k, return the kth row of the Pascal's triangle.
 
 For example, given k = 3,
@@ -455,7 +463,8 @@ Note:
 Could you optimize your algorithm to use only O(k) extra space?
 
 
-solution 1：stupid solution ,we don’t vector<vector<int>> list
+### solution 1：stupid solution ,we don’t use vector<vector<int>> list
+
 class Solution {
 public:
     vector<int> getRow(int rowIndex)//+1line
@@ -483,7 +492,8 @@ public:
         return result;
     }
 };
-solution 2：
+
+### solution 2：
 class Solution {
 public:
     vector<int> getRow(int rowIndex)//+1line
@@ -502,7 +512,7 @@ public:
     }
 };
 
-solution 3: 第i行的第k个数是C_i^k=i!/(k!*(i-k)!
+### solution 3: 第i行的第k个数是C_i^k=i!/(k!*(i-k)!
 
 不明白这个方法
 Note that this solution is math derived from number of Combinations.
@@ -529,7 +539,8 @@ vector<int> getRow(int rowIndex) {
 }
 
 
-121. Best Time to Buy and Sell Stock
+## 121. Best Time to Buy and Sell Stock
+
 Say you have an array for which the ith element is the price of a given stock on day i.
 
 If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), design an algorithm to find the maximum profit.
@@ -544,7 +555,9 @@ Input: [7, 6, 4, 3, 1]
 Output: 0
 
 In this case, no transaction is done, i.e. max profit = 0.
-solution 1：
+
+### solution 1：
+
 class Solution {
 public:
     int maxProfit(vector<int>& prices) 
@@ -573,7 +586,8 @@ public:
     }
 };
 
-Solution 2：
+### Solution 2：
+
 class Solution {
 public:
     int maxProfit(vector<int>& prices) 
@@ -601,13 +615,20 @@ public:
 
 
 
-122. Best Time to Buy and Sell Stock II
+## 122. Best Time to Buy and Sell Stock II
+
 Say you have an array for which the ith element is the price of a given stock on day i.
+
 Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+
 input: [3,5,3,4,6,8,4,5,6]
+
 output: 9
+
 2+1+2+2+1+1=9
-solution 1：
+
+### solution 1：
+
 class Solution {
 public:
     int maxProfit(vector<int>& prices) 
@@ -622,14 +643,16 @@ public:
         return sum;
     }
 };
-2.
-array(medium)
-11. Container With Most Water
+
+# 2.array(medium)
+
+## 11. Container With Most Water
 Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
 
 Note: You may not slant the container and n is at least 2.
 
-solution 1:
+### solution 1:
+
 class Solution {
 public:
     int maxArea(vector<int>& height) 
@@ -657,7 +680,9 @@ public:
     }
 };
 
-15. 3Sum(不太看得懂答案)
+
+## 15. 3Sum(不太看得懂答案)
+
 Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
 
 Note: The solution set must not contain duplicate triplets.
@@ -666,12 +691,19 @@ For example, given array S = [-1, 0, 1, 2, -1, -4],
 
 A solution set is:
 [
+
   [-1, 0, 1],
+
   [-1, -1, 2]
+
 ]
-solution 1:
+
+### solution 1:
+
 class Solution {
+
 public:
+
 vector<vector<int> > threeSum(vector<int> &num) {
     
     vector<vector<int> > res;
@@ -722,8 +754,11 @@ vector<vector<int> > threeSum(vector<int> &num) {
     return res;
     
 }
+
 };
-solution 2: better
+
+### solution 2: better
+
 class Solution {
 public:
 vector<vector<int> > threeSum(vector<int> &num) 
