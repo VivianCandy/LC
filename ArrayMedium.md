@@ -702,3 +702,116 @@ rotate the input matrix in-place such that it becomes:
 	    }
 	    
 	};
+
+## 54. Spiral Matrix
+
+Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+
+For example,
+
+Given the following matrix:
+
+[
+
+ [ 1, 2, 3 ],
+
+ [ 4, 5, 6 ],
+
+ [ 7, 8, 9 ]
+
+]
+
+You should return [1,2,3,6,9,8,7,4,5].
+
+### solution 1:
+
+	class Solution {
+	public:
+	    vector<int> spiralOrder(vector<vector<int>>& matrix) 
+	    {
+	        if(matrix.empty())
+	            return {};
+	        int m = matrix.size();
+	        int n = matrix[0].size();
+	        vector<int> spiral;
+	        
+	        
+	        int col, row;
+	        int u = 0; // upper most
+	        int r = n-1; //right most
+	        int d = m-1; // down most
+	        int l = 0; //left most
+	        
+	        while(true)
+	        {
+	            for(col=l; col<=r; col++)
+	            {
+	                spiral.push_back(matrix[u][col]);
+	            }
+	            if(++u>d)
+	                break;
+	            for(row = u; row<=d; row++)
+	            {
+	                spiral.push_back(matrix[row][r]);
+	            }
+	            if(--r<l)
+	                break;
+	            for(col = r; col>=l; col--)
+	            {
+	                spiral.push_back(matrix[d][col]);
+	            }
+	            if(--d<u)
+	                break;
+	            for(row = d; row>=u; row--)
+	            {
+	                spiral.push_back(matrix[row][l]);
+	            }
+	            if(++l>r)
+	                break;
+	        }
+	        return spiral;
+	    }
+	};
+
+
+### solution 2: better
+	
+	class Solution {
+	public:
+	    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+	        vector<int> result;
+	        if (matrix.size() == 0 || matrix[0].size() == 0) {
+	            return result;
+	        }
+	        
+	        int top = 0, bottom = matrix.size() - 1, left = 0, right = matrix[0].size() - 1;
+	        while (left <= right && top <= bottom) {
+	            for (int j = left; j <= right; j++) {
+	                result.push_back(matrix[top][j]);
+	            }
+	            
+	            top++;
+	            if (top > bottom) break; // Important
+	            for (int i = top; i <= bottom; i++) {
+	                result.push_back(matrix[i][right]);
+	            }
+	            
+	            right--;
+	            if (left > right) break; // Important
+	            for (int j = right; j >= left; j--) {
+	                result.push_back(matrix[bottom][j]);
+	            }
+	            
+	            bottom--;
+	            if (top > bottom) break; // Important
+	            for (int i = bottom; i >= top; i--) {
+	                result.push_back(matrix[i][left]);
+	            }
+	            
+	            left++;
+	            if (left > right) break; // Important
+	        }
+	        
+	        return result;
+	    }
+	};
