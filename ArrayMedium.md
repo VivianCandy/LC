@@ -1,4 +1,4 @@
-ANY PROBLEM? no！
+
 
 # 2.array(medium)
 
@@ -815,3 +815,32 @@ You should return [1,2,3,6,9,8,7,4,5].
 	        return result;
 	    }
 	};
+
+
+## 55. Jump Game
+
+Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you are able to reach the last index.
+
+For example:
+A = [2,3,1,1,4], return true.
+
+A = [3,2,1,0,4], return false.
+
+### solution 1
+
+    bool canJump(vector<int>& nums)
+    {
+        int size = nums.size();
+        int largestPosition = 0;
+        int i=0;
+        for(largestPosition = 0; i <size && i <= largestPosition ; i++ )
+        {
+            if(i + nums[i] > largestPosition)
+                largestPosition = i+ nums[i];
+        }
+        return i==size;
+    }
