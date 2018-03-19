@@ -844,3 +844,56 @@ A = [3,2,1,0,4], return false.
         }
         return i==size;
     }
+
+## 56. Merge Intervals
+
+
+Given a collection of intervals, merge all overlapping intervals.
+
+For example,
+
+Given [1,3],[2,6],[8,10],[15,18],
+
+return [1,6],[8,10],[15,18].
+
+### solution 1
+sorting->
+
+if the last element is smaller than the the start of Inters, then Inters should be push back
+
+	/**
+	 * Definition for an interval.
+	 * struct Interval {
+	 *     int start;
+	 *     int end;
+	 *     Interval() : start(0), end(0) {}
+	 *     Interval(int s, int e) : start(s), end(e) {}
+	 * };
+	 */
+	class Solution {
+	public:
+	    vector<Interval> merge(vector<Interval>& inters)
+	    {
+	        if(inters.size()<1)
+	            return inters;
+	        vector<Interval> res;
+	        std::sort(inters.begin(), inters.end(), [](Interval a,Interval b){return a.start < b.start;});
+			// Interval:type a:object
+	        //sort(begin, end, com) ascending order
+	 
+	        res.push_back(inters[0]);
+	        for(int i=1; i<inters.size();i++)
+	        {
+	            if (res.back().end < inters[i].start)
+	            {
+	                res.push_back(inters[i]);
+	            }
+	            else if(res.back().end < inters[i].end)
+	            {
+	                res.back().end = inters[i].end;
+	            }
+	
+	        }
+	        return res;
+	    }
+	};
