@@ -963,3 +963,114 @@ You should return the following matrix:
 	        
 	    }
 	};
+
+
+## 60. Permutation Sequence
+
+The set [1,2,3,…,n] contains a total of n! unique permutations.
+
+By listing and labeling all of the permutations in order,
+We get the following sequence (ie, for n = 3):
+
+解释
+
+123
+
+132
+
+213
+
+231
+
+312
+
+321
+
+可以发现最高位上每个数出现了两次，当第一位数确定后，第二位每个数出现了1次，当第二位数确定了，第三位只能出现一次。
+
+若n=4，
+1234
+
+最高位每个数出现6次，当第一位数确定后，后面三位数每个数字都出现2次。当第二位数也确定了，后面的数字只出现一次。当第三位确定了，第四位数字也只能出现一次。
+
+k从1开始算（没有第0行）
+
+假设k=17，可以转换为数组下标16：
+
+最高位取1,2,3,4,间的一个数，每个数字出现6次=3！。当k=16时，最高位的数字下标应该是16/6=2（6个数一变），所以最高位是3。
+
+第二位数从1,2,4中间取3，k'=k%(3!)=4,每个数字出现2次=2！，所以第二位数的下标是4/2=2，所以是4.
+
+第三位数是1,2中取一个，k''=k'%(2!)=0,剩下的数字出现一次，所以第三位数的下标是0/1=0.所以是1
+
+第四位数是从2中取一个，k'''=k''%(1!)=0,剩下的数字出现0！=1次，所以第四个数的下标是0/1=0，也就是数字2.
+
+规律：
+a1 = k /(n-1)!
+
+k1=k
+
+a2 = k1 /(n-2)！
+
+k2 = k1 %(n-2)!
+
+...
+
+an-1 = kn-2 /1!
+
+kn-1 = kn-2 %1!
+
+
+an = kn-1 /0!
+
+kn = kn-1 % 0!
+
+
+### solution 1
+	class Solution {
+	public:
+	    string getPermutation(int n, int k) {
+	        string res;
+	        string num = "123456789";
+	        vector<int> f(n, 1);
+	        for (int i = 1; i < n; ++i) f[i] = f[i - 1] * i;
+			\\f存的是阶乘的值
+	        --k;
+	        for (int i = n; i >= 1; --i) {
+	            int j = k / f[i - 1];
+	            k %= f[i - 1];
+	            res.push_back(num[j]);
+	            num.erase(j, 1);
+	        }
+	        return res;
+	    }
+	};
+
+
+### solution 2 i don't understand how it works, amazing!
+
+	string getPermutation(int n, int k) {
+	    int pTable[10] = {1};
+	    for(int i = 1; i <= 9; i++){
+	        pTable[i] = i * pTable[i - 1];
+	    }
+	    string result;
+	    vector<char> numSet;
+	    numSet.push_back('1');
+	    numSet.push_back('2');
+	    numSet.push_back('3');
+	    numSet.push_back('4');
+	    numSet.push_back('5');
+	    numSet.push_back('6');
+	    numSet.push_back('7');
+	    numSet.push_back('8');
+	    numSet.push_back('9');
+	    while(n > 0){
+	        int temp = (k - 1) / pTable[n - 1];
+	        result += numSet[temp];
+	        numSet.erase(numSet.begin() + temp);
+	        k = k - temp * pTable[n - 1];
+	        n--;
+	    }
+	    return result;
+	}
