@@ -897,3 +897,69 @@ if the last element is smaller than the the start of Inters, then Inters should 
 	        return res;
 	    }
 	};
+
+## 59. Spiral Matrix II
+
+iven an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+
+For example,
+
+Given n = 3,
+
+You should return the following matrix:
+
+[
+
+ [ 1, 2, 3 ],
+
+ [ 8, 9, 4 ],
+
+ [ 7, 6, 5 ]
+
+]
+
+### solution 1
+
+	class Solution {
+	public:
+	    vector<vector<int>> generateMatrix(int n) 
+	    {
+	        vector<vector<int>> Mat(n,vector<int>(n,0));
+	        int top=0,right=n-1,bottom=n-1,left=0;
+	        int count=1;
+	        while(top<=bottom && left<=right)
+	        {
+	            for(int i=left; i<=right;i++)
+	            {
+	                Mat[top][i]=count++;
+	            }
+	            top++;
+	            if(top>bottom)
+	                break;
+	            for(int j=top; j<=bottom;j++)
+	            {
+	                Mat[j][right]=count++;
+	            }
+	            right--;
+	            if(left>right)
+	                break;
+	            for(int i=right; i>=left; i--)
+	            {
+	                Mat[bottom][i]=count++;
+	            }
+	            bottom--;
+	            if(top>bottom)
+	                break;
+	            for(int j=bottom; j>=top;j--)//because top has already be increased
+	            {
+	                Mat[j][left]=count++;
+	            }
+	            left++;
+	            if(left>right)
+	                break;
+	        }
+	        return Mat;
+	        
+	        
+	    }
+	};
