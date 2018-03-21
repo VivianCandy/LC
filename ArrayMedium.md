@@ -1035,12 +1035,13 @@ kn = kn-1 % 0!
 	        vector<int> f(n, 1);
 	        for (int i = 1; i < n; ++i) f[i] = f[i - 1] * i;
 			\\f存的是阶乘的值
-	        --k;
+	        --k;//to get index
 	        for (int i = n; i >= 1; --i) {
 	            int j = k / f[i - 1];
 	            k %= f[i - 1];
 	            res.push_back(num[j]);
 	            num.erase(j, 1);
+				//delete index j(1 length) in string num
 	        }
 	        return res;
 	    }
@@ -1074,3 +1075,47 @@ kn = kn-1 % 0!
 	    }
 	    return result;
 	}
+
+## 62 Unique Paths
+
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+### solution 1
+	int uniquePaths(int m, int n)
+	{
+		int N = m+n-2;//total steps we need
+		int down = m-1;//number of steps we need to go down
+		double res = 1;
+		/*calculate the total possible path
+		combination(N,down) = N! / (down!(N-down)!)
+	    reduce the numerator and denominator and get
+	 	C = ((N-down+1)*(N-down+2)*...*N) / down!
+		number of loop (N-(N-down+1)+1)=down
+		*/
+		for(int i=1; i<=down; i++)//number of loop:down
+		{
+			res *= N-down+i / i!
+		}
+		return (int)res;
+	}
+### solution 2 easy to understand
+	class Solution {
+	public:
+	    int uniquePaths(int m, int n) 
+	    {
+	        double path=1.0;
+	        int step = m+n-2;
+	        int down = m-1;
+	        //Combination = step!/(down!(step-down)!)
+	        for(int i=1; i<=down; i++)
+	        {
+	            path =path* (step-down+i) / i;
+	        }
+	        return (int)path;
+	    }
+	   
+	};
