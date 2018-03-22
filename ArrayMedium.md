@@ -1261,3 +1261,102 @@ Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do
 	        }
 	    }
 	};
+
+
+74. Search a 2D Matrix
+
+Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+
+Integers in each row are sorted from left to right.
+The first integer of each row is greater than the last integer of the previous row.
+For example,
+
+Consider the following matrix:
+
+[
+
+  [1,   3,  5,  7],
+
+  [10, 11, 16, 20],
+
+  [23, 30, 34, 50]
+
+]
+
+Given target = 3, return true.
+
+
+
+### solution 1: using binary serach
+
+m*n matrix convert to an array 
+
+matrix[x][y]=>a[x*n+y]
+
+an array convert to m*n matrix 
+a[x] => matrix[x/n][x%n]
+
+	class Solution {
+	public:
+	    bool searchMatrix(vector<vector<int>>& matrix, int target)
+	    {
+	        if (matrix.empty()||matrix[0].empty())
+	        {
+	            return false;
+	        }
+	        int row = matrix.size();
+	        int col = matrix[0].size();
+	        if(target < matrix[0][0] || matrix[row-1][col-1]<target)
+	            return false;
+	        int left = 0;
+	        int right = row*col-1;//index-1
+	        int mid;
+	        while(left<=right)
+	        {
+	            mid = (left + right)/2;
+	            if(matrix[mid/col][mid%col]==target)
+	            {
+	                return true;
+	            }
+	            else if(matrix[mid/col][mid%col] < target)
+	            {
+	                left = mid+1;
+	            }
+	            else
+	            {
+	                right = mid-1;
+	            }
+	        }
+	        return false;
+	    }
+	};
+
+
+### solution 2: slower but still good(lu)
+	class Solution {
+	public:
+	    bool searchMatrix(vector<vector<int>>& matrix, int target)
+	    {
+	        if(matrix.empty()) return false;
+	        
+	        int m = matrix.size();
+	
+	        int row = m-1;
+	        for (int i = 1; i<m; i++)
+	        {
+	            if (target >= matrix[i - 1][0] && target < matrix[i][0])
+	            {
+	                row = i - 1;
+	                break;
+	            }
+	        }
+	        vector<int>::iterator iter = find(matrix[row].begin(), matrix[row].end(), target);
+	        if (iter == matrix[row].end())
+	            return false;
+	        else
+	
+	            return true;
+	    }
+	};
+
+
