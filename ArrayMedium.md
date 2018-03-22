@@ -1263,7 +1263,7 @@ Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do
 	};
 
 
-74. Search a 2D Matrix
+## 74. Search a 2D Matrix
 
 Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
 
@@ -1359,4 +1359,66 @@ a[x] => matrix[x/n][x%n]
 	    }
 	};
 
+## 75. Sort Colors
 
+Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+
+Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+Note:
+
+You are not suppose to use the library's sort function for this problem.
+
+### solution 1:
+
+	class Solution {
+	public:
+	    void sortColors(vector<int>& nums) 
+	    {
+	        int j;
+	        int temp;
+	        for(int i=0; i<nums.size()-1;i++)
+	        {
+	            j = i+1;
+	            while(j<nums.size())
+	            {
+	                while(nums[i]==nums[j])
+	                {
+	                    j++;
+	                }
+	                if(j<nums.size() &&nums[i]>nums[j])
+	                {
+	                    temp = nums[j];
+	                    nums[j] = nums[i];
+	                    nums[i] = temp;
+	                }
+	               
+	                j++;
+	            }
+	        }
+	    }
+	};
+
+
+### solution 2:为什么两个while顺序不能交换
+
+	class Solution {
+	public:
+	    void sortColors(vector<int>& nums) 
+	    {
+	        int front =0;
+	        int back = nums.size()-1;
+	        for(int i=0; i<nums.size();i++)
+	        {
+	            while(nums[i]==2 && i <back)
+	            {
+	                swap(nums[i],nums[back--]);
+	            }
+	            while(nums[i]==0 && i>front)//用while 是发现交换后的数也是0
+	            {
+	                swap(nums[i],nums[front++]);
+	            }
+	
+	        }
+	    }
+	};
