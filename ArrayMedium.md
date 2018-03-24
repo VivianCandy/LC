@@ -1567,3 +1567,62 @@ word = "ABCB", -> returns false.
 	
 	
 	};
+
+## 80. Remove Duplicates from Sorted Array II
+Follow up for "Remove Duplicates":
+What if duplicates are allowed at most twice?
+
+For example,
+Given sorted array nums = [1,1,1,2,2,3],
+
+Your function should return length = 5, with the first five elements of nums being 1, 1, 2, 2 and 3. It doesn't matter what you leave beyond the new length.
+
+检测的时候返回值是数组
+
+### solution 1：my solution is quick
+对每位i，把n[i]放进去，对于j，如果是第一次相等则放进去，若不是则++j，再i=j-1；使得每个i对应的都是新数字的第一位
+
+	class Solution {
+	public:
+	    int removeDuplicates(vector<int>& nums)
+	    {
+	        int size = nums.size();
+	        int count = 0;
+	        for(int i=0; i<size; i++)
+	        {
+	            nums[count++]=nums[i];
+	           for(int j=i+1; j<size;j++)
+	           {
+	               if(nums[i]==nums[j])
+	               {
+	                   nums[count++] = nums[j];
+	                   while(nums[i] == nums[++j] && j<size)
+	                   {
+	                       
+	                   }
+	               
+	                   i=j-1;
+	                   break;
+	         
+	               }
+	           }
+	
+	        }
+	        return count;
+	    }
+	};
+
+
+### solution 2： it's slower than solution one
+前两个数放进数组，从第三位数起，每隔两位检测数一不一样
+	class Solution {
+	public:
+	    int removeDuplicates(vector<int>& nums)
+	    {
+	        int i = 0;
+	        for (int n : nums)//惊呆，还能这么遍历数组
+	            if (i < 2 || n > nums[i-2])
+	                nums[i++] = n;
+	        return i;
+	    }
+	};
