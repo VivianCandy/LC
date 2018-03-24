@@ -1422,3 +1422,148 @@ You are not suppose to use the library's sort function for this problem.
 	        }
 	    }
 	};
+
+
+## 78. Subsets
+
+Given a set of distinct integers, nums, return all possible subsets (the power set).
+
+Note: The solution set must not contain duplicate subsets.
+
+For example,
+If nums = [1,2,3], a solution is:
+
+[
+
+  [3],
+
+  [1],
+
+  [2],
+
+  [1,2,3],
+
+  [1,3],
+
+  [2,3],
+
+  [1,2],
+
+  []
+
+]
+
+### solution 1: don't understand but it is amazing!
+
+	vector<vector<int>> subsets(vector<int> & nums)
+	{
+		sort(nums.begin(),nums.end());
+		int size = nums.size();
+		int row = pow(2,size);
+		vector<vector<int>> comb(row);
+		for(int i=0; i<size; i++)
+		{
+			for(int j=0; j<row; j++)
+			{
+				if(j >> i) &1 //如果j右移i位的数是1
+					comb[j].push_back(nums[i];
+			}
+		}
+		return comb;
+	}
+
+### solution 2: //不会
+
+	class Solution {
+	public:
+	    vector<vector<int>> subsets(vector<int>& nums)
+	    {
+	        vector<vector<int>> comb;
+	        sort(nums.begin(),nums.end());
+	        vector<int> sub;
+	        genSubsets(nums, 0, sub, comb);
+	        return comb;
+	
+	    }
+	    void genSubsets(vector<int>& nums, int start, vector<int>& sub, vector<vector<int>>& comb)
+	    {
+	        comb.push_back(sub);//the first time is null
+	        for(int i=start; i<nums.size(); i++)
+	        {
+	            sub.push_back(nums[i]);
+	            genSubsets(nums, i+1, sub, comb);
+	            sub.pop_back();
+	        }
+	    }
+	};
+
+## 79. Word Search
+
+Given a 2D board and a word, find if the word exists in the grid.
+
+The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+For example,
+Given board =
+
+[
+
+  ['A','B','C','E'],
+
+  ['S','F','C','S'],
+
+  ['A','D','E','E']
+
+]
+
+word = "ABCCED", -> returns true,
+word = "SEE", -> returns true,
+word = "ABCB", -> returns false.
+### solution 1 ：dfs don't understand
+	class Solution {
+	public:
+	    bool exist(vector<vector<char>>& board, string word)
+	    {
+	        int m,n,i,j;
+	        int sLen = word.size();
+	        if((m = board.size()) && (n=board[0].size())&& sLen)
+	        {
+	               for(i=0; i<m; ++i)
+	               {
+	                   for(j=0; j<n; ++j)
+	                   {
+	                       if(dfs(board, i, j, word, 0, m, n, sLen))
+	                           return true;
+	                   }
+	               }
+	         }
+	         return false;
+	    }
+	           
+	private:
+	           bool dfs(vector<vector<char>>& board, int row, int col, const string &word, int start, int m, int n, int sLen)
+	           {
+	               char curC;
+	               bool res = false;
+	               if((curC = board[row][col]) != word[start])//判断当前元素是否匹配
+	                   return false;
+	               if(start == sLen-1)
+	                   return true;
+	               board[row][col] = '*';
+	               if(row>0) //第二行开始
+	                   res = dfs(board, row-1, col, word, start+1, m, n, sLen);
+	               if(!res && row<m-1)
+	                   res = dfs(board, row+1, col, word, start+1, m, n, sLen);
+	               if(!res && col>0)
+	                   res = dfs(board, row, col-1, word, start+1, m, n, sLen);
+	               if(!res && col<n-1)
+	                   res = dfs(board, row, col+1, word, start+1, m, n, sLen);
+	               board[row][col] = curC;
+	               return res;
+	                   
+	           }
+	
+	    
+	
+	
+	};
